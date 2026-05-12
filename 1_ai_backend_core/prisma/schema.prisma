@@ -1,0 +1,47 @@
+generator client {
+  provider             = "prisma-client-python"
+  recursive_type_depth = 5
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Tenant {
+  id          String    @id @default(uuid())
+  name        String
+  webhook_url String?
+  created_at  DateTime  @default(now())
+  routes      Route[]
+}
+
+model Route {
+  id          String    @id @default(uuid())
+  tenant_id   String
+  tenant      Tenant    @relation(fields: [tenant_id], references: [id])
+  origin      String
+  destination String
+  price       Float
+  trips       Trip[]
+}
+
+model Trip {
+  id              String    @id @default(uuid())
+  route_id        String
+  route           Route     @relation(fields: [route_id], references: [id])
+  departure_time  DateTime
+  total_seats     Int
+  available_seats Int
+  bookings        Booking[]
+}
+
+model Booking {
+  id             String    @id @default(uuid())
+  trip_id        String
+  trip           Trip      @relation(fields: [trip_id], references: [id])
+  customer_name  String
+  customer_phone String
+  status         String    @default("PENDING") // PENDING, CONFIRMED, CANCELLED
+}

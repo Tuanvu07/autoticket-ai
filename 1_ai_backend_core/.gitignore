@@ -1,0 +1,37 @@
+# =====================
+# Global Wildcards (CHẶN TOÀN TẬP MỌI THƯ MỤC CON)
+# =====================
+**/node_modules/
+**/.next/
+**/out/
+**/dist/
+**/build/
+**/.env
+**/.env.*
+.DS_Store
+Thumbs.db
+
+# =====================
+# Python Backend (1_ai_backend_core)
+# =====================
+1_ai_backend_core/__pycache__/
+1_ai_backend_core/*.pyc
+1_ai_backend_core/venv/
+1_ai_backend_core/env/
+1_ai_backend_core/.venv
+1_ai_backend_core/db.sqlite3
+1_ai_backend_core/instance/
+
+# =====================
+# Common ignores
+# =====================
+**/__pycache__/
+**/.pytest_cache/
+**/.coverage
+**/*.log
+**/*.log.*
+**/.idea/
+**/.vscode/settings.json
+**/.swc/
+**/.turbo/
+**/*.tsbuildinfo

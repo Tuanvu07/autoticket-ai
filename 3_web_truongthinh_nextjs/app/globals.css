@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Base resets ── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background-color: #F5F7FA;
+  color: #1A1A2E;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Utility: Section title underline decoration ── */
+.section-title {
+  @apply relative inline-flex items-center gap-4 text-2xl sm:text-3xl font-bold text-brand-text tracking-tight;
+}
+.section-title::before,
+.section-title::after {
+  content: "";
+  @apply block w-10 h-0.5 bg-brand-blue flex-shrink-0;
+}
+
+/* ── Utility: Vietnamese nav link style ── */
+.nav-link {
+  @apply text-sm font-medium text-gray-600 hover:text-brand-blue transition-colors duration-200 whitespace-nowrap;
+}
+.nav-link.active { @apply text-brand-blue font-semibold; }
+
+/* ── Custom scrollbar ── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #f1f5f9; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+/* ── Seat map colors ── */
+.seat-available { @apply bg-white border-2 border-brand-blue/40 text-brand-blue hover:bg-brand-blue hover:text-white cursor-pointer transition-all; }
+.seat-selected  { @apply bg-brand-blue border-2 border-brand-blue text-white cursor-pointer; }
+.seat-booked    { @apply bg-gray-200 border-2 border-gray-300 text-gray-400 cursor-not-allowed; }
+.seat-driver    { @apply bg-gray-100 border-2 border-gray-300 text-gray-500 cursor-default; }
