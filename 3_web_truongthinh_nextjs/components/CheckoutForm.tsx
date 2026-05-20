@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { User, Phone, MapPin, CreditCard } from "lucide-react";
+import { User, Phone, MapPin, CreditCard, Camera } from "lucide-react";
+import CCCDScannerModal from "./CCCDScannerModal";
 
 interface CheckoutFormProps {
   selectedSeats: string[];
@@ -30,9 +31,19 @@ export default function CheckoutForm({
   const [name, setName]     = useState("");
   const [phone, setPhone]   = useState("");
   const [pickup, setPickup] = useState("");
+  const [isScannerOpen, setIsScannerOpen] = useState(false);
 
   const totalPrice = selectedSeats.length * route.price;
   const formatVnd  = (n: number) => n.toLocaleString("vi-VN") + "đ";
+
+  const handleCCCDDataExtracted = (data: {
+    name: string;
+    cccd: string;
+    address: string;
+  }) => {
+    setName(data.name);
+    setIsScannerOpen(false);
+  };
 
   return (
     <div className="bg-white rounded-3xl border border-brand-border shadow-card overflow-hidden animate-fade-in-up">
@@ -94,14 +105,25 @@ export default function CheckoutForm({
               <User className="w-3.5 h-3.5 text-brand-blue" />
               Họ và tên <span className="text-brand-red">*</span>
             </label>
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Nguyễn Văn A"
-              required
-              className={INPUT_CLS}
-            />
+            <div className="flex gap-2">
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Nguyễn Văn A"
+                required
+                className={INPUT_CLS}
+              />
+              <button
+                type="button"
+                onClick={() => setIsScannerOpen(true)}
+                className="px-4 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-xs transition-all duration-200 flex items-center gap-1.5 flex-shrink-0 shadow-lg hover:-translate-y-0.5"
+                title="Quét CCCD để tự động điền tên"
+              >
+                <Camera className="w-4 h-4" />
+                <span className="hidden sm:inline">Quét CCCD</span>
+              </button>
+            </div>
           </div>
 
           <div>
@@ -159,6 +181,13 @@ export default function CheckoutForm({
           </div>
         </form>
       </div>
+
+      {/* ── CCCD Scanner Modal ── */}
+      <CCCDScannerModal
+        isOpen={isScannerOpen}
+        onClose={() => setIsScannerOpen(false)}
+        onDataExtracted={handleCCCDDataExtracted}
+      />
     </div>
   );
 }
