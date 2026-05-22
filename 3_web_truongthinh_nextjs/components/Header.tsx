@@ -22,7 +22,7 @@ const NAV = [
       { label: "Tuyến chạy và giá vé", href: "/service-transport" },
       { label: "Quy định khi đi xe", href: "/service-transport#quy_dinh" },
       { label: "Chính sách đổi trả vé", href: "/service-transport#doi-tra" },
-      { label: "Liên hệ đặt vé", href: "/service-transport#lien-he" },
+      { label: "Liên hệ đặt vé", href: "/#contact" },
     ],
   },
   {
@@ -255,7 +255,7 @@ export default function Header() {
 
       {/* ── Persistent floating "Đặt vé/hàng" CTA — from all screenshots ── */}
       <a
-        href="#dat-ve"
+        href="/#dat-ve"
         className="fixed bottom-6 right-5 z-50 flex items-center gap-2 bg-brand-red hover:bg-brand-red-dark text-white font-bold text-sm px-5 py-3 rounded-full shadow-cta transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_8px_32px_rgba(198,40,40,0.5)] animate-pulse2 select-none"
       >
         🎫 Đặt vé/hàng
